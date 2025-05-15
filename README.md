@@ -4,6 +4,8 @@ This project explores the use of latent trajectory representations to enhance Be
 
 An LLM interprets a natural-language goal and determines where objects should be placed on a table, while a pre-trained Robomimic policy performs the physical pick-and-place.
 
+[demo](output_images/videos/Screenshot%20from%202025-05-15%2016-12-14.png)
+
 ## Here is a Youtube video [link](https://youtu.be/CqmEF2GN3Ao?si=0a53cSOqqBm2TgvH) to see it in action.
 ---
 
