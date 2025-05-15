@@ -25,6 +25,7 @@ import psutil
 import sys
 import socket
 import traceback
+import multiprocessing as mp  # Added import for multiprocessing
 
 from collections import OrderedDict
 
@@ -40,9 +41,9 @@ import robomimic.utils.file_utils as FileUtils
 from robomimic.config import config_factory
 from robomimic.algo import algo_factory, RolloutPolicy
 from robomimic.utils.log_utils import PrintLogger, DataLogger, flush_warnings
-from robomimic.scripts.vae_wrapper import VAEWrapper  # Add import for VAEWrapper
+from robomimic.scripts.vae_wrapper import VAEWrapper
 
-def train(config, device, vae_weights=None):  # Add vae_weights parameter
+def train(config, device, vae_weights=None):
     """
     Train a model using the algorithm.
     """
@@ -104,8 +105,23 @@ def train(config, device, vae_weights=None):  # Add vae_weights parameter
                 use_depth_obs=shape_meta["use_depths"],
             )
             env = EnvUtils.wrap_env_from_config(env, config=config)
-            envs[env.name] = env
-            print(envs[env.name])
+            # Ensure renderer is properly initialized and cleaned up
+            if hasattr(env, 'sim') and hasattr(env.sim, 'renderer'):
+                try:
+                    env.sim.renderer.initialize()
+                except Exception as e:
+                    print(f"Warning: Renderer initialization failed for {env_name}: {e}")
+                # Register cleanup on environment destruction
+                def cleanup_renderer():
+                    try:
+                        env.sim.renderer.close()
+                        env.sim.renderer = None
+                    except Exception as e:
+                        print(f"Warning: Renderer cleanup failed for {env_name}: {e}")
+                import atexit
+                atexit.register(cleanup_renderer)
+            envs[env_name] = env
+            print(envs[env_name])
 
     print("")
 
@@ -160,10 +176,11 @@ def train(config, device, vae_weights=None):  # Add vae_weights parameter
     )
 
     # Initialize VAEWrapper if vae_weights is provided
-    valid_loader = None  # Define valid_loader before checking vae_weights
+    valid_loader = None
     if vae_weights is not None:
         vae_wrapper = VAEWrapper(
             vae_path=vae_weights,
+            dataset_path=config.train.data,
             device=device
         )
         train_loader.collate_fn = vae_wrapper
@@ -283,6 +300,14 @@ def train(config, device, vae_weights=None):  # Add vae_weights parameter
                 video_skip=config.experiment.get("video_skip", 5),
                 terminate_on_success=config.experiment.rollout.terminate_on_success,
             )
+            # Explicitly free renderer contexts
+            for env in envs.values():
+                if hasattr(env, 'sim') and hasattr(env.sim, 'renderer'):
+                    try:
+                        env.sim.renderer.close()
+                        env.sim.renderer = None
+                    except Exception as e:
+                        print(f"Warning: Renderer cleanup failed: {e}")
 
             for env_name in all_rollout_logs:
                 rollout_logs = all_rollout_logs[env_name]
@@ -331,9 +356,20 @@ def train(config, device, vae_weights=None):  # Add vae_weights parameter
         data_logger.record("System/RAM Usage (MB)", mem_usage, epoch)
         print("\nEpoch {} Memory Usage: {} MB\n".format(epoch, mem_usage))
 
+    for env in envs.values():
+        if hasattr(env, 'sim') and hasattr(env.sim, 'renderer'):
+            try:
+                env.sim.renderer.close()
+                env.sim.renderer = None
+            except Exception as e:
+                print(f"Warning: Final renderer cleanup failed: {e}")
+
     data_logger.close()
 
 def main(args):
+    # Set multiprocessing start method to 'spawn' for CUDA compatibility
+    mp.set_start_method('spawn', force=True)
+
     if args.config is not None:
         ext_cfg = json.load(open(args.config, 'r'))
         config = config_factory(ext_cfg["algo_name"])

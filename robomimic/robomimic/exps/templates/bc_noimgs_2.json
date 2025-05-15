@@ -14,11 +14,11 @@
             "every_n_seconds": null,
             "every_n_epochs": 20,
             "epochs": [],
-            "on_best_validation": true,
-            "on_best_rollout_return": true,
+            "on_best_validation": false,
+            "on_best_rollout_return": false,
             "on_best_rollout_success_rate": true
         },
-        "epoch_every_n_steps": 200,    
+        "epoch_every_n_steps": 200,
         "validation_epoch_every_n_steps": 50,
         "env": null,
         "additional_envs": null,
@@ -30,15 +30,15 @@
             "enabled": true,
             "n": 50,
             "horizon": 1000,
-            "rate": 20,
+            "rate": 50,
             "warmstart": 0,
             "terminate_on_success": true
         }
     },
     "train": {
         "data": "/home/anu/mimicgen/datasets/core/pick_place_d0.hdf5",
-        "output_dir": "/home/anu/mimicgen/mimicgen/../training_results/core/pick_place_d0/image/trained_models_3",
-        "num_data_workers": 2,
+        "output_dir": "/home/anu/mimicgen/mimicgen/../training_results/core/pick_place_d0/image/trained_revised_point2",
+        "num_data_workers": 0,
         "hdf5_cache_mode": "low_dim",
         "hdf5_use_swmr": true,
         "hdf5_load_next_obs": false,
@@ -56,7 +56,7 @@
         ],
         "goal_mode": null,
         "cuda": true,
-        "batch_size": 16,
+        "batch_size": 64,
         "num_epochs": 300,
         "seed": 1
     },
@@ -80,7 +80,10 @@
             "l1_weight": 0.0,
             "cos_weight": 0.0
         },
-        "actor_layer_dims": [1024, 1024],
+        "actor_layer_dims": [
+            1024,
+            1024
+        ],
         "gaussian": {
             "enabled": false,
             "fixed_std": false,
@@ -97,7 +100,7 @@
             "low_noise_eval": true
         },
         "vae": {
-            "enabled": true,
+            "enabled": false,
             "latent_dim": 14,
             "latent_clip": null,
             "kl_weight": 1.0,
@@ -142,7 +145,6 @@
                 "bidirectional": false
             }
         },
-
         "transformer": {
             "enabled": false,
             "context_length": 10,
@@ -162,15 +164,14 @@
         "modalities": {
             "obs": {
                 "low_dim": [
-                    "robot0_eef_pos",          
-                    "robot0_eef_quat",         
-                    "robot0_gripper_qpos",     
+                    "robot0_eef_pos",
+                    "robot0_eef_quat",
+                    "robot0_gripper_qpos",
                     "robot0_joint_pos",
                     "robot0_joint_vel",
-                    "object"       
+                    "object"
                 ],
-                "rgb": [
-                ],
+                "rgb": [],
                 "depth": [],
                 "scan": []
             },
