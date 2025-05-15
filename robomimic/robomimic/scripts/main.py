@@ -5,7 +5,8 @@ from run_trained_agent import run_trained_agent, build_args, get_parser  # Assum
 
 
 # OpenAI API key'
-#openai.api_key = " " ########## enter your key to access this 
+openai.api_key = "REMOVED_SECRET_KEYproj-lpgTz5rGKAgsX3YVPlKVRkk1R8WDCWTIQzeKmHKN6DSQq11xMN9aUdAJuPZkYgf6lOegnRTNIbT3BlbkFJO50BfmdRDrFtRbamc47PpoLAc3CqdXPLxOQEZA64DzXPNs1eEDvFCzu5xgcU3zvhgBmz2jsLYA"
+
 # Robosuite table bounds
 X_MIN, X_MAX = -0.145, 0.145
 Y_MIN, Y_MAX = -0.195, 0.195

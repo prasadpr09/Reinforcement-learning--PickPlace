@@ -19,7 +19,7 @@ This approach combines:
 
 ## Setup Instructions
 
-> 💡 **Important:** Before proceeding, follow the [MimicGen installation instructions](https://mimicgen.github.io/docs/introduction/installation.html) exactly as described in their docs. Then activate the `mimicgen` conda environment.
+> **Important:** Before proceeding, follow the [MimicGen installation instructions](https://mimicgen.github.io/docs/introduction/installation.html) exactly as described in their docs. Then activate the `mimicgen` conda environment.
 
 ### 1. Clone This Repository
 
@@ -78,13 +78,91 @@ python run_trained_agent.py   --agent ~/mimicgen/training_results/core/pick_plac
 ```
 ### Training on MultiModal Data 
 
-1. 
+1. We used Behavior Cloning algorithm with increased modality as mentioned below:
+
+```
+"low_dim": [
+    "robot0_eef_pos",          
+    "robot0_eef_quat",         
+    "robot0_gripper_qpos",     
+    "robot0_joint_pos",
+    "robot0_joint_vel",
+    ]
+    
+"rgb": ["agentview_image",
+        "robot0_eye_in_hand_image"
+    ]
+```
+
+Results: 
+Training loss graph:
+
+Pick and Place Success Rollout Graph:
+
+
+Benchmark: We compare all our results with this
 
 
 ### We have implemented Algorithms not already present in Robomimic:
-1. [Coherent Soft Imitation Learning](https://github.com/google-deepmind/csil)
+
+1. Behavior Cloning with VAE + increased modalities 
+
+
+2. Behavior Cloning VAE pre-trained weights + increased modalities 
+
+```
+    "low_dim": [
+        "robot0_eef_pos",          
+        "robot0_eef_quat",         
+        "robot0_gripper_qpos",     
+        "robot0_joint_pos",
+        "robot0_joint_vel",
+        "latent_vae"       
+    ],
+    "rgb": ["agentview_image",
+        "robot0_eye_in_hand_image"
+    ],
+```
+
+
+Observations:
+
+Training loss graph:
+Pick and Place Success Rollout Graph:
+
+
+3. Behavior Cloning using VAE pre-trained weights  + reduced modalities 
+
+```
+    "low_dim": [
+        "robot0_eef_pos",          
+        "robot0_eef_quat",         
+        "robot0_gripper_qpos",     
+        "robot0_joint_pos",
+        "robot0_joint_vel",
+        "latent_vae"       
+    ],
+    "rgb": [ # removed this modality 
+    ],
+```
+
+
+Observations:
+
+Training loss graph:
+Pick and Place Success Rollout Graph:
+
+
+4. [Coherent Soft Imitation Learning](https://github.com/google-deepmind/csil)
 You can find it in robomimic/robomimic/models/csil.py 
 To run it, 
 
-2. BC with VAE and Multimodal Data
+Observations:
+
+Training loss graph:
+Pick and Place Success Rollout Graph:
+
+
+5. [Diffusion Policy:](https://github.com/real-stanford/diffusion_policy)
+
 
