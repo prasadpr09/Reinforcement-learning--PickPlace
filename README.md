@@ -76,7 +76,7 @@ Run:
 python run_trained_agent.py   --agent ~/mimicgen/training_results/core/pick_place_d0/image/trained_models/core_pick_place_d0_image/multimulti/models/model_epoch_600/data.pkl   --n_rollouts 50   --horizon 400   --seed 0   --video_path /home/output.mp4   --camera_names agentview robot0_eye_in_hand
 
 ```
-### Training on MultiModal Data 
+## Training on MultiModal Data 
 
 1. We used Behavior Cloning algorithm with increased modality as mentioned below:
 
@@ -103,7 +103,7 @@ Pick and Place Success Rollout Graph:
 Benchmark: We compare all our results with this
 
 
-### We have implemented Algorithms not already present in Robomimic:
+## We have implemented Algorithms not already present in Robomimic:
 
 1. Behavior Cloning with VAE + increased modalities 
 
