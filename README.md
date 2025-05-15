@@ -2,6 +2,7 @@
 
 An LLM interprets a natural-language goal and determines where objects should be placed on a table, while a pre-trained Robomimic policy performs the physical pick-and-place.
 
+## Here is a Youtube video link to see it working.
 ---
 
 ## Background
@@ -94,16 +95,18 @@ python run_trained_agent.py   --agent ~/mimicgen/training_results/core/pick_plac
     ]
 ```
 
-##Results: 
-#Training loss graph:
-[Training loss]
+### Results:
+
+Training loss graph:
+
 ![Pick and Place](output_images/bc_increased_modalities/Screenshot%20from%202025-05-15%2001-49-36.png)
 
-#Pick and Place Success Rollout Graph:
+Pick and Place Success Rollout Graph:
 ![Rollout](output_images/bc_increased_modalities/Screenshot%20from%202025-05-15%2001-48-42.png)
 
 
-Benchmark: We compare all our results with Behavior Cloning + Reduced Modalities as it outperformed other algorithms till now:
+## Benchmark: We compare all our results with Behavior Cloning + Reduced Modalities as it outperformed other algorithms till now:
+
 ```
 "low_dim": [
     "robot0_eef_pos",          
@@ -114,12 +117,12 @@ Benchmark: We compare all our results with Behavior Cloning + Reduced Modalities
 "rgb": ["agentview_image",
         "robot0_eye_in_hand_image"
     ]
-```    
-[Training loss]
-![Training]([output_images/bc_reduced_modalities/Screenshot%20from%202025-05-15%2001-50-40.png](https://github.com/prasadpr09/Reinforcement-learning--PickPlace/blob/699477f37508a3a0484deda6a8cd9135941701a3/output_images/bc_reduced%20modalities/Screenshot%20from%202025-05-15%2001-50-40.png))
+```
+Training loss:
+![Training loss](output_images/bc_reduced%20modalities/Screenshot%20from%202025-05-15%2001-50-40.png)
 
-#Pick and Place Success Rollout Graph:
-![Success_rollouts]([output_images/bc_reduced_modalities/Screenshot%20from%202025-05-15%2001-50-20.png](https://github.com/prasadpr09/Reinforcement-learning--PickPlace/blob/699477f37508a3a0484deda6a8cd9135941701a3/output_images/bc_reduced%20modalities/Screenshot%20from%202025-05-15%2001-50-20.png))
+Pick and Place Success Rollout Graph:
+![Success_rollouts](output_images/bc_reduced%20modalities/Screenshot%20from%202025-05-15%2001-50-20.png)
 
 
 
@@ -174,15 +177,14 @@ Pick and Place Success Rollout Graph:
 
 
 4. [Coherent Soft Imitation Learning](https://github.com/google-deepmind/csil)
-You can find it in robomimic/robomimic/models/csil.py 
-To run it, 
-
-Observations:
+You can find it in [robomimic/robomimic/models/csil.py](robomimic/robomimic/algo/csil.py)
 
 Training loss graph:
-Pick and Place Success Rollout Graph:
+
 
 
 5. [Diffusion Policy:](https://github.com/real-stanford/diffusion_policy)
+You can find it in [robomimic/robomimic/models/diffusion_policy.py](robomimic/robomimic/algo/diffusion_policy_config.py)
 
+Training loss graph:
 
