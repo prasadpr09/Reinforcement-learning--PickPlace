@@ -128,11 +128,8 @@ Pick and Place Success Rollout Graph:
 
 ## We have implemented Algorithms not already present in Robomimic:
 
-1. Behavior Cloning with VAE + increased modalities 
-
-
-2. Behavior Cloning VAE pre-trained weights + increased modalities 
-
+1. Behavior Cloning Baseline (with Increased Modalities) 
+Custom Implementation of Behaviour Cloning Algorithm with both Proprioceptive (Added new modalities for our version of implementation) and Visual data for baseline performance.
 ```
     "low_dim": [
         "robot0_eef_pos",          
@@ -140,10 +137,27 @@ Pick and Place Success Rollout Graph:
         "robot0_gripper_qpos",     
         "robot0_joint_pos",
         "robot0_joint_vel",
-        "latent_vae"       
+        "object"       
     ],
-    "rgb": ["agentview_image",
+    "rgb": [
+        "agentview_image",
         "robot0_eye_in_hand_image"
+    ],
+```
+
+
+2. Behavior Cloning with Proprioception Only (Reduced Modalities)
+Measuring the effect of removing high-dimensional vision input, using only robot state information (proprioception) and ground truth environment data building on our custom implementation.
+```
+    "low_dim": [
+        "robot0_eef_pos",          
+        "robot0_eef_quat",         
+        "robot0_gripper_qpos",     
+        "robot0_joint_pos",
+        "robot0_joint_vel",
+        "object"       
+    ],
+    "rgb": [   # removed this modality 
     ],
 ```
 
@@ -154,7 +168,8 @@ Training loss graph:
 Pick and Place Success Rollout Graph:
 
 
-3. Behavior Cloning using VAE pre-trained weights  + reduced modalities 
+3. Behavior Cloning with VAE Enabled Training on Reduced Modalities
+Uses a VAE enabled integration on our custom Implementation for BC training to extract latent trajectory features and store them as weights, on our reduced set.
 
 ```
     "low_dim": [
@@ -163,6 +178,29 @@ Pick and Place Success Rollout Graph:
         "robot0_gripper_qpos",     
         "robot0_joint_pos",
         "robot0_joint_vel",
+        "object"       
+    ],
+    "rgb": [ # removed this modality 
+    ],
+```
+
+Observations:
+
+Training loss graph:
+Pick and Place Success Rollout Graph:
+
+
+4. Behavior Cloning with VAE Latent on Reduced Modalities
+Utilizes the pre-trained latent representations obtained from a VAE to enhance proprioceptive-only input, aiming to recover performance lost due to the absence of raw visual data. 
+
+```
+    "low_dim": [
+        "robot0_eef_pos",          
+        "robot0_eef_quat",         
+        "robot0_gripper_qpos",     
+        "robot0_joint_pos",
+        "robot0_joint_vel",
+        "object"
         "latent_vae"       
     ],
     "rgb": [ # removed this modality 
