@@ -1,8 +1,10 @@
 # LLM-Guided Pick-and-Place with Robomimic
 
+This project explores the use of latent trajectory representations to enhance Behavioral Cloning (BC) for robotic pick-and-place tasks using only proprioceptive and object-centric inputs. We train a Variational Autoencoder (VAE) as a temporal encoder on low-dimensional robot state data to capture motion intent, task phase, and context. Four configurations are evaluated: full observation (proprio + image), proprio only, VAE-enabled BC, and BC with precomputed latent\_vae. Results show that latent\_vae improves policy performance over raw proprioception alone and could provide promising improvements in ensuring task continuity in times of exteroceptive sensor failures. Additionally, we integrate a Large Language Model (LLM) to generate spatial goals from natural language, enabling comparison of policy generalization in both single-object and multi-object manipulation trials. Our findings demonstrate that VAE-based behavior summarization, combined with LLM-driven task specification, enables efficient, scalable policy learning without heavy reliance on exteroceptive sensors for structured manipulation.
+
 An LLM interprets a natural-language goal and determines where objects should be placed on a table, while a pre-trained Robomimic policy performs the physical pick-and-place.
 
-## Here is a Youtube video link to see it working.
+## Here is a Youtube video [link](https://youtu.be/CqmEF2GN3Ao?si=0a53cSOqqBm2TgvH) to see it in action.
 ---
 
 ## Background
@@ -105,8 +107,8 @@ Pick and Place Success Rollout Graph:
 
 ![Rollout](output_images/bc_increased_modalities/Screenshot%20from%202025-05-15%2001-48-42.png)
 
-
-## Benchmark: We compare all our results with Behavior Cloning + Reduced Modalities as it outperformed other algorithms till now:
+<!--
+% ## Benchmark: We compare all our results with Behavior Cloning + Reduced Modalities as it outperformed other algorithms till now:
 
 ```
 "low_dim": [
@@ -127,9 +129,11 @@ Pick and Place Success Rollout Graph:
 
 ![Success_rollouts](output_images/bc_reduced%20modalities/Screenshot%20from%202025-05-15%2001-50-20.png)
 
-
+-->
 
 ## We have implemented Algorithms not already present in Robomimic:
+
+To support our idea, custom training code, wrappers for algorithm class and configuration files were created. Please refer to robomimic/scripts for details.
 
 ## 1. Behavior Cloning Baseline (with Increased Modalities) 
 Custom Implementation of Behaviour Cloning Algorithm with both Proprioceptive (Added new modalities for our version of implementation) and Visual data for baseline performance.
