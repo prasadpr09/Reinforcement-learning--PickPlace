@@ -148,6 +148,15 @@ Custom Implementation of Behaviour Cloning Algorithm with both Proprioceptive (A
     ],
 ```
 
+Observations:
+
+Training loss graph:  
+![Training loss](output_images/Behavior-Cloning-Baseline%20/Training.png)
+
+Pick and Place Success Rollout Graph:  
+![Success_rollouts](output_images/Behavior-Cloning-Baseline%20/rollout.png)
+
+
 
 ## 2. Behavior Cloning with Proprioception Only (Reduced Modalities)
 Measuring the effect of removing high-dimensional vision input, using only robot state information (proprioception) and ground truth environment data building on our custom implementation.
