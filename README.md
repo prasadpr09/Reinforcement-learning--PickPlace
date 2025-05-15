@@ -78,7 +78,7 @@ python run_trained_agent.py   --agent ~/mimicgen/training_results/core/pick_plac
 ```
 ## Training on MultiModal Data 
 
-1. We used Behavior Cloning algorithm with increased modality as mentioned below:
+1. We used Behavior Cloning algorithm with increased modality as mentioned below (these were our settings in the JSON file):
 
 ```
 "low_dim": [
@@ -94,13 +94,33 @@ python run_trained_agent.py   --agent ~/mimicgen/training_results/core/pick_plac
     ]
 ```
 
-Results: 
-Training loss graph:
+##Results: 
+#Training loss graph:
+[Training loss]
+![Pick and Place](output_images/bc_increased_modalities/Screenshot%20from%202025-05-15%2001-49-36.png)
 
-Pick and Place Success Rollout Graph:
+#Pick and Place Success Rollout Graph:
+![Rollout](output_images/bc_increased_modalities/Screenshot%20from%202025-05-15%2001-48-42.png)
 
 
-Benchmark: We compare all our results with this
+Benchmark: We compare all our results with Behavior Cloning + Reduced Modalities as it outperformed other algorithms till now:
+```
+"low_dim": [
+    "robot0_eef_pos",          
+    "robot0_eef_quat",         
+    "robot0_gripper_qpos",     
+    ]
+    
+"rgb": ["agentview_image",
+        "robot0_eye_in_hand_image"
+    ]
+```    
+[Training loss]
+![Training]([output_images/bc_reduced_modalities/Screenshot%20from%202025-05-15%2001-50-40.png](https://github.com/prasadpr09/Reinforcement-learning--PickPlace/blob/699477f37508a3a0484deda6a8cd9135941701a3/output_images/bc_reduced%20modalities/Screenshot%20from%202025-05-15%2001-50-40.png))
+
+#Pick and Place Success Rollout Graph:
+![Success_rollouts]([output_images/bc_reduced_modalities/Screenshot%20from%202025-05-15%2001-50-20.png](https://github.com/prasadpr09/Reinforcement-learning--PickPlace/blob/699477f37508a3a0484deda6a8cd9135941701a3/output_images/bc_reduced%20modalities/Screenshot%20from%202025-05-15%2001-50-20.png))
+
 
 
 ## We have implemented Algorithms not already present in Robomimic:
