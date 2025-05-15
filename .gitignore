@@ -5,3 +5,5 @@ __pycache__/
 *.pth
 *.mp4
 *.pth
+.env
+openai_key.txt
