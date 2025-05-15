@@ -163,8 +163,11 @@ Measuring the effect of removing high-dimensional vision input, using only robot
     "rgb": [   # removed this modality 
     ],
 ```
+To Train:
+```
+python train_vae.py --config /home/anu/robomimic/robomimic/exps/templates/bc_noimgs_2.json --dataset /home/anu/mimicgen/datasets/core/pick_place_d0.hdf5
 
-
+```
 Observations:
 
 Training loss graph:  
