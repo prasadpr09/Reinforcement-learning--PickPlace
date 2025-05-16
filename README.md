@@ -82,6 +82,9 @@ Run:
 python run_trained_agent.py   --agent ~/mimicgen/training_results/core/pick_place_d0/image/trained_models/core_pick_place_d0_image/multimulti/models/model_epoch_600/data.pkl   --n_rollouts 50   --horizon 400   --seed 0   --video_path /home/output.mp4   --camera_names agentview robot0_eye_in_hand
 
 ```
+
+
+<!--
 ## Training on MultiModal Data 
 
 1. We used Behavior Cloning algorithm with increased modality as mentioned below (these were our settings in the JSON file):
@@ -110,7 +113,6 @@ Pick and Place Success Rollout Graph:
 
 ![Rollout](output_images/bc_increased_modalities/Screenshot%20from%202025-05-15%2001-48-42.png)
 
-<!--
 % ## Benchmark: We compare all our results with Behavior Cloning + Reduced Modalities as it outperformed other algorithms till now:
 
 ```
@@ -157,11 +159,14 @@ Custom Implementation of Behaviour Cloning Algorithm with both Proprioceptive (A
 
 Observations:
 
-Training loss graph:  
-![Training loss](output_images/Behavior-Cloning-Baseline%20/Training.png)
 
-Pick and Place Success Rollout Graph:  
-![Success_rollouts](output_images/Behavior-Cloning-Baseline%20/rollout.png)
+![Pick and Place](output_images/bc_increased_modalities/Screenshot%20from%202025-05-15%2001-49-36.png)
+
+Pick and Place Success Rollout Graph:
+
+![Rollout](output_images/bc_increased_modalities/Screenshot%20from%202025-05-15%2001-48-42.png)
+
+
 
 
 
@@ -185,12 +190,11 @@ python train_vae.py --config /home/anu/robomimic/robomimic/exps/templates/bc_noi
 
 ```
 Observations:
-
 Training loss graph:  
-![Training loss](output_images/bc_with_proprioception_only/Screenshot%20from%202025-05-15%2014-35-55.png)
+![Training loss](output_images/Behavior-Cloning-Baseline%20/Training.png)
 
 Pick and Place Success Rollout Graph:  
-![Success_rollouts](output_images/bc_with_proprioception_only/Screenshot%20from%202025-05-15%2014-34-57.png)
+![Success_rollouts](output_images/Behavior-Cloning-Baseline%20/rollout.png)
 
 
 
@@ -236,8 +240,13 @@ Utilizes the pre-trained latent representations obtained from a VAE to enhance p
 
 Observations:
 
-Training loss graph:
-Pick and Place Success Rollout Graph:
+
+Training loss graph:  
+![Training loss](output_images/bc_with_proprioception_only/Screenshot%20from%202025-05-15%2014-35-55.png)
+
+Pick and Place Success Rollout Graph:  
+![Success_rollouts](output_images/bc_with_proprioception_only/Screenshot%20from%202025-05-15%2014-34-57.png)
+
 
 
 4. [Coherent Soft Imitation Learning](https://github.com/google-deepmind/csil)
